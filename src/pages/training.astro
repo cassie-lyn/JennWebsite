@@ -1,0 +1,139 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageBanner from "../components/PageBanner.astro";
+import SplitSection from "../components/SplitSection.astro";
+import SectionHeader from "../components/SectionHeader.astro";
+import CtaBand from "../components/CtaBand.astro";
+
+import bannerImg from "../assets/photos/jenn-riding-grey.jpg";
+import schoolingImg from "../assets/photos/jenn-schooling.jpg";
+import patioArenaImg from "../assets/photos/arena-paddocks-patio.jpg";
+
+const programs = [
+  {
+    title: "Full Training",
+    body:
+      "Your horse in full work with Jenn: a consistent, progressive program that builds strength, suppleness, and confidence over time.",
+  },
+  {
+    title: "Training Rides",
+    body:
+      "Regular rides from Jenn to keep your horse tuned and moving forward between your own sessions in the saddle.",
+  },
+  {
+    title: "Lessons",
+    body:
+      "Private lessons for every level, from solid basics to upper-level work. Patient, clear, and tailored to you and your horse.",
+  },
+];
+
+const description =
+  "Classical dressage training and lessons in Rhode Island with USDF bronze and silver medalist Jenn Czechowski. Full training, training rides, private lessons, and clinics at Avastar Dressage.";
+---
+
+<Layout title="Training" description={description}>
+  <PageBanner
+    image={bannerImg}
+    alt="Jenn Czechowski cantering a grey horse under a bright sky, in a navy show coat"
+    eyebrow="Dressage training · RI / MA"
+    title="Training with Jenn"
+    lede="Classical foundations, patient coaching, and a plan that takes you and your horse further than you thought you could go."
+    position="center 35%"
+  />
+
+  <!-- Philosophy -->
+  <SplitSection
+    image={schoolingImg}
+    alt="Jenn schooling a horse in a relaxed session, wearing a teal top"
+    eyebrow="Philosophy"
+    title="A classical foundation, then everything on top of it"
+    imageSide="left"
+    bg="oat"
+    position="center 25%"
+  >
+    <p>
+      Jenn's system starts with a solid foundation of classical dressage
+      basics: rhythm, relaxation, and connection. The upper-level work is built
+      on top of that base. She's calm and patient in the ring, and she believes
+      every horse-and-rider pair can do more than they think.
+    </p>
+    <p>
+      Many of her students have moved up the levels and earned USDF recognition
+      with her in their corner.
+    </p>
+  </SplitSection>
+
+  <!-- Programs -->
+  <section class="bg-cream">
+    <div class="mx-auto max-w-6xl px-5 sm:px-8 py-20 md:py-24">
+      <SectionHeader
+        eyebrow="Ways to train"
+        title="Find the right fit for you and your horse"
+        intro="No two riders are on the same path. Whether you want your horse in full work or a lesson a week, Jenn will help you build a plan that makes sense."
+      />
+      <div class="mt-12 grid gap-6 md:grid-cols-3">
+        {
+          programs.map((p, i) => (
+            <div class="flex h-full flex-col rounded-2xl border border-line bg-white p-8 shadow-sm">
+              <span class="font-display text-2xl text-brass-deep">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <span class="mt-3 h-px w-10 bg-brass/50" />
+              <h3 class="mt-5 text-xl font-semibold text-navy">{p.title}</h3>
+              <p class="mt-3 leading-relaxed text-ink/75">{p.body}</p>
+            </div>
+          ))
+        }
+      </div>
+      <p class="mt-8 text-sm text-muted">
+        Programs are tailored to each horse and rider. Call Jenn to talk through
+        what would work best.
+      </p>
+    </div>
+  </section>
+
+  <!-- Practice like you compete -->
+  <SplitSection
+    image={patioArenaImg}
+    alt="Avastar's outdoor dressage arena seen from the patio, with white paddock fencing beyond"
+    eyebrow="Show-ready"
+    title="Practice like you compete"
+    imageSide="right"
+    bg="oat"
+    aspect="aspect-[4/3]"
+    position="center 45%"
+  >
+    <p>
+      The outdoor is a regulation dressage arena with a judge's booth at C,
+      which makes it the perfect place to run through a full test before you
+      ever load the trailer.
+    </p>
+    <p>
+      Schooling the whole pattern at home, with the letters, the centerline,
+      and a booth at C, takes a lot of the mystery out of show day.
+    </p>
+  </SplitSection>
+
+  <!-- Clinics -->
+  <section class="bg-cream">
+    <div class="mx-auto max-w-3xl px-5 sm:px-8 py-20 md:py-24 text-center">
+      <SectionHeader
+        eyebrow="Clinics"
+        title="Fresh eyes, right at home"
+        align="center"
+      />
+      <p class="prose-body mx-auto mt-6 text-lg text-ink/80">
+        Avastar regularly hosts clinics with visiting trainers, including Miguel
+        Anacoreta and Roel Theunissen, the same trainer Jenn rides with
+        herself. Clinics are a great way to get fresh eyes on your riding and
+        keep building, without ever leaving the barn.
+      </p>
+    </div>
+  </section>
+
+  <CtaBand
+    eyebrow="Train at Avastar"
+    heading="Let's talk about your goals"
+    body="Tell Jenn where you are and where you'd like to go. A quick phone call is the easiest way to figure out the right training plan."
+  />
+</Layout>

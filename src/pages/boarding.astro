@@ -1,0 +1,188 @@
+---
+import { Image } from "astro:assets";
+import Layout from "../layouts/Layout.astro";
+import PageBanner from "../components/PageBanner.astro";
+import SplitSection from "../components/SplitSection.astro";
+import SectionHeader from "../components/SectionHeader.astro";
+import PullQuote from "../components/PullQuote.astro";
+import CtaBand from "../components/CtaBand.astro";
+
+import bannerImg from "../assets/photos/arena-paddocks-patio.jpg";
+import beddedStall from "../assets/photos/bedded-stall.jpg";
+import happyHorse from "../assets/photos/happy-horse-stall.jpg";
+import horseOverGate from "../assets/photos/horse-over-gate.png";
+import tackLocker from "../assets/photos/tack-locker.jpg";
+
+const included = [
+  "Daily private turnout in individual paddocks, weather permitting",
+  "Quality hay four times a day, with second cut from Canada and New York when available",
+  "Grain tailored to each horse's needs, generally fed up to three times a day",
+  "Daily stall cleaning and deep, comfortable bedding",
+  "Blanket changes, fly spray, and whatever day-to-day extras your horse needs",
+  "Fresh, excellent-quality water available around the clock",
+  "Ceiling fans over every stall for the hot summer months",
+  "A hot-and-cold wash stall",
+  "A spacious double-door tack locker for every boarder",
+];
+
+const description =
+  "Full-care horse boarding in Lincoln, RI: European-style stalls, private daily turnout, quality hay four times a day, and genuinely individualized care at Avastar Dressage.";
+---
+
+<Layout title="Boarding" description={description}>
+  <PageBanner
+    image={bannerImg}
+    alt="The patio and outdoor dressage arena at Lepore Farm, framed by white paddock fencing on a sunny day"
+    eyebrow="Full Board · Lincoln, RI"
+    title="Full board, done right"
+    lede="Everything your horse needs to thrive, plus the peace of mind that comes with a barn that truly cares."
+    position="center 60%"
+  />
+
+  <!-- What's included -->
+  <section class="bg-oat">
+    <div class="mx-auto max-w-6xl px-5 sm:px-8 py-20 md:py-24">
+      <div class="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+        <div class="lg:order-2">
+          <p class="eyebrow eyebrow--rule">What's included</p>
+          <h2 class="mt-4 text-3xl sm:text-4xl text-navy">
+            Everything, taken care of
+          </h2>
+          <p class="prose-body mt-5 text-lg text-ink/80">
+            Board at Avastar is genuinely full care. Jenn and Bree handle the
+            details so you can focus on your riding.
+          </p>
+          <ul class="mt-8 space-y-4">
+            {
+              included.map((item) => (
+                <li class="flex items-start gap-3.5">
+                  <span class="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brass-deep/12 ring-1 ring-brass/25">
+                    <svg
+                      viewBox="0 0 24 24"
+                      class="h-3.5 w-3.5 text-brass-deep"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="3"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                  </span>
+                  <span class="leading-relaxed text-ink/85">{item}</span>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+
+        <div class="photo-frame aspect-[4/5] lg:order-1">
+          <Image
+            src={beddedStall}
+            alt="A blanketed bay horse in a deeply bedded European-style stall at Avastar"
+            width={1040}
+            class="h-full w-full object-cover"
+            style="object-position: center 40%;"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- The barns -->
+  <SplitSection
+    image={happyHorse}
+    alt="Scotty, a bay horse, looking over a green European-style stall front with his nameplate"
+    eyebrow="The barns"
+    title="Two barns, built around the horse"
+    imageSide="right"
+    bg="cream"
+    position="center 30%"
+  >
+    <p>
+      The main barn holds thirteen European-style open stalls, with six more in
+      a second, smaller barn. Rubber mats run through every stall and aisle, and
+      the barn stays comfortable in every season. Ceiling fans over each stall
+      keep the air moving through the summer heat, and where the horses live it
+      generally never drops below freezing, even in a proper New England winter.
+    </p>
+    <p>
+      There's a hot-and-cold wash stall and, yes, a real heated bathroom with
+      real plumbing. The European open fronts let horses see and socialize with
+      their neighbors safely, which makes for calmer, happier horses.
+    </p>
+  </SplitSection>
+
+  <!-- Turnout & grounds -->
+  <SplitSection
+    image={horseOverGate}
+    alt="A dark bay horse leaning his head over the white gate of his paddock on a sunny summer day"
+    eyebrow="Turnout & grounds"
+    title="Room to be a horse"
+    imageSide="left"
+    bg="oat"
+    position="center 30%"
+  >
+    <p>
+      Every horse gets daily turnout in its own private paddock, weather
+      permitting. Individual turnout keeps horses safe and gives each one space
+      to relax, roll, and stretch out.
+    </p>
+    <p>
+      Beyond the paddocks there's a mowed bridle path to hack around, hay fields
+      to ride in, and plenty of grass for hand-grazing on a nice afternoon.
+    </p>
+  </SplitSection>
+
+  <!-- Tack locker -->
+  <SplitSection
+    image={tackLocker}
+    alt="A tidy double-door tack locker at Avastar, hung with saddles and ribbons"
+    eyebrow="Your own space"
+    title="A tack locker with real room"
+    imageSide="right"
+    bg="cream"
+  >
+    <p>
+      Every boarder gets a spacious, wide, double-door tack locker: room for
+      your saddles, bridles, blankets, and all the rest, kept clean and close to
+      your horse.
+    </p>
+    <p>
+      It's a small thing that makes barn life easier every single day.
+    </p>
+  </SplitSection>
+
+  <!-- The community -->
+  <section class="bg-oat">
+    <div class="mx-auto max-w-3xl px-5 sm:px-8 py-20 md:py-24 text-center">
+      <SectionHeader
+        eyebrow="The community"
+        title="More than a place to keep your horse"
+        align="center"
+      />
+      <p class="prose-body mx-auto mt-6 text-lg text-ink/80">
+        Boarding at Avastar comes with a community of riders at every level,
+        working toward all kinds of goals, all genuinely rooting for each
+        other. Boarders stick around to hang out after rides, summer brings cookouts
+        and barn parties, and everyone's wins get celebrated together, whether
+        they happen in the saddle or in life. In a sport with plenty of ups and
+        downs, that kind of support matters as much as anything on the care
+        list.
+      </p>
+    </div>
+  </section>
+
+  <PullQuote
+    quote="Jenn and Bree treat your horse like their own. That's what sets Avastar apart."
+    cite="Cassie G."
+    role="Avastar boarder"
+  />
+
+  <CtaBand
+    eyebrow="Boarding at Avastar"
+    heading="Ask about availability"
+    body="We like to keep the barn full of happy, well-cared-for horses. Call Jenn to ask about openings, or to arrange a visit and see the care for yourself."
+  />
+</Layout>

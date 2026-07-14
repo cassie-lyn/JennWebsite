@@ -1,0 +1,239 @@
+---
+import { Image, getImage } from "astro:assets";
+import { withBase } from "../data/site";
+import Layout from "../layouts/Layout.astro";
+import PageBanner from "../components/PageBanner.astro";
+import SplitSection from "../components/SplitSection.astro";
+import SectionHeader from "../components/SectionHeader.astro";
+import CtaBand from "../components/CtaBand.astro";
+
+import bannerImg from "../assets/photos/indoor-arena.jpg";
+import indoorFlags from "../assets/photos/indoor-arena-flags.jpg";
+import sunriseArena from "../assets/photos/outdoor-arena-sunrise.jpg";
+import barnAisle from "../assets/photos/barn-aisle.jpg";
+import bridlePath from "../assets/photos/bridle-path.jpg";
+
+import galWinter from "../assets/photos/jenn-riding-winter.png";
+import galAisle from "../assets/photos/horses-in-aisle.jpg";
+import galResting from "../assets/photos/resting-horse.jpg";
+import galNuzzling from "../assets/photos/horses-nuzzling.jpg";
+import galPaddockRainbow from "../assets/photos/paddocks-rainbow.jpg";
+import galDoubleRainbow from "../assets/photos/double-rainbow.jpg";
+
+// Optimized poster still for the ambient video (frame from the bridle path).
+const poster = await getImage({ src: bridlePath, width: 1280, format: "webp" });
+
+const gallery = [
+  {
+    img: galWinter,
+    alt: "Jenn riding in the insulated indoor arena on a winter day",
+  },
+  {
+    img: galAisle,
+    alt: "A row of curious horses looking out over the European stall fronts down the matted barn aisle",
+  },
+  {
+    img: galPaddockRainbow,
+    alt: "A rainbow arching over the blue-roofed barn and paddocks after the rain",
+  },
+  {
+    img: galNuzzling,
+    alt: "Two Avastar horses, a bay and a grey, reaching over their stall fronts to nuzzle",
+  },
+  {
+    img: galDoubleRainbow,
+    alt: "A double rainbow over the outdoor arena and patio at Lepore Farm",
+  },
+  {
+    img: galResting,
+    alt: "A blanketed horse lying down and resting comfortably in a deeply bedded stall",
+  },
+];
+
+const description =
+  "Tour the Avastar Dressage facility at Lepore Farm: a warm indoor arena with GGT footing, a regulation outdoor dressage arena with judge's booth, European-style barns, and a mowed bridle path and hay fields to hack out in.";
+---
+
+<Layout title="Facility" description={description}>
+  <PageBanner
+    image={bannerImg}
+    alt="The warm, wood-paneled indoor arena at Avastar Dressage"
+    eyebrow="The facility"
+    title="A farm built for dressage"
+    lede="Two arenas, two barns, and grounds to ride out on, all set up to help you and your horse do your best work."
+    position="center 45%"
+  />
+
+  <!-- Indoor arena -->
+  <SplitSection
+    image={indoorFlags}
+    alt="The indoor arena at Avastar with dressage flags on the wall and freshly leveled GGT footing"
+    eyebrow="Indoor arena"
+    title="Comfortable footing, comfortable all winter"
+    imageSide="left"
+    bg="oat"
+    position="center"
+  >
+    <p>
+      The large indoor arena is built for real work. The footing is premium GGT,
+      dragged frequently to keep it consistent underfoot ride after ride.
+    </p>
+    <p>
+      Extra insulation keeps the space comfortable to ride in straight through a
+      New England winter. Around the barn, where the horses live, it generally
+      never drops below freezing.
+    </p>
+  </SplitSection>
+
+  <!-- Outdoor arena -->
+  <SplitSection
+    image={sunriseArena}
+    alt="A pink sunrise over the regulation outdoor dressage arena at Lepore Farm, with patio seating at the rail"
+    eyebrow="Outdoor arena"
+    title="A regulation arena under open sky"
+    imageSide="right"
+    bg="cream"
+    position="center"
+    aspect="aspect-[4/3]"
+    imgWidth={960}
+  >
+    <p>
+      The outdoor is a regulation-size dressage arena with sand footing and a
+      judge's booth at C. It's dragged as needed and ready whenever you want to
+      school a full test or simply ride out in the fresh air. A patio right at
+      the rail gives family and friends a comfortable spot to sit and watch.
+    </p>
+    <p>
+      Both rings are kept in shape so the footing is never an excuse, just a
+      good place to ride.
+    </p>
+  </SplitSection>
+
+  <!-- The barns -->
+  <SplitSection
+    image={barnAisle}
+    alt="European stall fronts with brass finials line the clean, rubber-matted aisle of the main barn"
+    eyebrow="The barns"
+    title="Two barns, thoughtfully run"
+    imageSide="left"
+    bg="oat"
+    aspect="aspect-[4/5]"
+    position="center"
+  >
+    <p>
+      Thirteen European-style open stalls fill the main barn, with six more in a
+      second, smaller barn, and rubber mats run through every stall and aisle.
+    </p>
+    <p>
+      Add a hot-and-cold wash stall, a heated bathroom with real plumbing, and a
+      spacious double-door tack locker for every boarder, and the day-to-day
+      just works.
+    </p>
+    <p>
+      <a
+        href={withBase("/boarding")}
+        class="inline-flex items-center gap-1.5 font-semibold text-brass-deep hover:text-brass-hover"
+      >
+        See what's included in board
+        <svg
+          viewBox="0 0 24 24"
+          class="h-4 w-4"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+          <polyline points="12 5 19 12 12 19"></polyline>
+        </svg>
+      </a>
+    </p>
+  </SplitSection>
+
+  <!-- Ride out (ambient video) -->
+  <section class="bg-cream">
+    <div class="mx-auto max-w-6xl px-5 sm:px-8 py-20 md:py-24">
+      <div class="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
+        <div>
+          <p class="eyebrow eyebrow--rule">Ride out</p>
+          <h2 class="mt-4 text-3xl sm:text-4xl text-navy">
+            Fields and a bridle path, right out the door
+          </h2>
+          <div class="prose-body mt-6 text-ink/85">
+            <p>
+              When you want a change of scenery, there's a mowed bridle path
+              around the paddocks, hay fields to ride in, and plenty of grass
+              for hand-grazing.
+            </p>
+            <p>
+              Some of the best training happens on a relaxed hack out. It's a
+              chance for horse and rider to breathe, stretch, and come back
+              fresh.
+            </p>
+          </div>
+        </div>
+
+        <div
+          class="photo-frame aspect-[4/3] bg-navy lg:order-none"
+        >
+          <video
+            id="rideout-video"
+            class="h-full w-full object-cover"
+            autoplay
+            muted
+            loop
+            playsinline
+            preload="metadata"
+            poster={poster.src}
+            aria-label="A first-person view riding down a mowed path through the hay fields at Lepore Farm"
+          >
+            <source src={withBase("/videos/field-riding.mp4")} type="video/mp4" />
+          </video>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery -->
+  <section class="bg-oat">
+    <div class="mx-auto max-w-6xl px-5 sm:px-8 py-20 md:py-24">
+      <SectionHeader
+        eyebrow="Around the farm"
+        title="A look around Avastar"
+        intro="A few moments from life at Lepore Farm, from winter rides in the indoor to rainbows over the paddocks."
+      />
+      <div class="mt-12 gap-4 [column-fill:_balance] columns-2 md:columns-3">
+        {
+          gallery.map((g) => (
+            <figure class="gallery-tile mb-4 break-inside-avoid">
+              <Image
+                src={g.img}
+                alt={g.alt}
+                width={720}
+                class="w-full"
+                loading="lazy"
+              />
+            </figure>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <CtaBand
+    eyebrow="Come see it"
+    heading="See the farm in person"
+    body="Photos only go so far. Call Jenn to set up a visit and walk the barns, the arenas, and the grounds for yourself."
+  />
+</Layout>
+
+<script>
+  // Respect reduced-motion: don't autoplay the ambient loop.
+  const v = document.getElementById("rideout-video") as HTMLVideoElement | null;
+  if (v && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    v.removeAttribute("autoplay");
+    v.pause();
+  }
+</script>

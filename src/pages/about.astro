@@ -1,0 +1,217 @@
+---
+import { Image } from "astro:assets";
+import Layout from "../layouts/Layout.astro";
+import PageBanner from "../components/PageBanner.astro";
+import SplitSection from "../components/SplitSection.astro";
+import SectionHeader from "../components/SectionHeader.astro";
+import CtaBand from "../components/CtaBand.astro";
+
+import bannerImg from "../assets/photos/farm-entrance-fall.jpg";
+import jennImg from "../assets/photos/jenn-riding-hero.jpg";
+import breeImg from "../assets/photos/bree-riding.jpg";
+import loparoFarm from "../assets/photos/lepore-farm-view.jpg";
+import tonka from "../assets/photos/tonka.jpg";
+import babyCat from "../assets/photos/baby-cat.jpg";
+import doubleRainbow from "../assets/photos/double-rainbow.jpg";
+
+const credentials = [
+  "USDF Bronze Medalist",
+  "USDF Silver Medalist",
+  "Competed through Prix St. Georges",
+];
+
+const crew = [
+  {
+    name: "Tonka",
+    role: "Chief of Security",
+    img: tonka,
+    alt: "Tonka, Jenn's English bulldog, lying contentedly in a pile of hay",
+    body:
+      "Jenn's bulldog Tonka supervises the barn aisle most days and takes her greeting duties very seriously.",
+    position: "center 40%",
+  },
+  {
+    name: "Baby Cat",
+    role: "Barn Cat in Chief",
+    img: babyCat,
+    alt: "Baby Cat, the fluffy light-grey resident barn cat, on the barn mats",
+    body:
+      "Of the two resident barn cats, Baby Cat (light grey and endlessly photogenic) has a way of winning everyone over.",
+    position: "center 35%",
+  },
+];
+
+const description =
+  "Meet Avastar Dressage: trainer and USDF bronze and silver medalist Jenn Czechowski, barn manager Bree Dolbec, the barn crew, and a genuinely supportive boarding community at Lepore Farm in Lincoln, Rhode Island.";
+---
+
+<Layout title="About" description={description}>
+  <PageBanner
+    image={bannerImg}
+    alt="A stone pillar with a lantern and white fence at the entrance to Lepore Farm on an autumn evening"
+    eyebrow="Our story"
+    title="About Avastar"
+    lede="A close-knit dressage barn where classical training and genuinely individualized care come standard."
+    position="center 55%"
+  />
+
+  <!-- Jenn -->
+  <SplitSection
+    image={jennImg}
+    alt="Jenn Czechowski riding a chestnut horse in an extended trot, in a navy show coat"
+    eyebrow="Trainer & Owner"
+    title="Jennifer Czechowski"
+    imageSide="left"
+    bg="oat"
+    aspect="aspect-[4/3]"
+    position="center 30%"
+  >
+    <p>
+      Jenn built Avastar Dressage on classical principles, the same foundation
+      that runs through her own riding and everything she teaches. As an
+      instructor she's calm, patient, and quietly ambitious for her students:
+      many have moved up the levels, earned USDF recognition, and been coached
+      by Jenn at championship competitions.
+    </p>
+    <p>
+      A USDF bronze and silver medalist, Jenn has competed through Prix St.
+      Georges on clients' horses. These days her focus is on helping her
+      riders chase their goals. She trains with Roel Theunissen and has ridden
+      in clinics with Ann Guptill, Rita Brown, Lynn Kimball-Davis, Karl
+      Mikolka, Sandy Osborn, Claudia Tarlov, and Robert Zandvoort.
+    </p>
+    <p>
+      Before going out on her own, Jenn spent years as assistant trainer and
+      barn manager for Delante Dressage, owned by Lou Denizard. In 2008 she
+      founded Avastar Dressage, naming it for her first dressage partner
+      Avastar, known around the barn as Harry.
+    </p>
+    <div class="mt-7 flex flex-wrap gap-2.5">
+      {
+        credentials.map((c) => (
+          <span class="rounded-full border border-brass/35 bg-brass-deep/8 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.12em] text-brass-deep">
+            {c}
+          </span>
+        ))
+      }
+    </div>
+  </SplitSection>
+
+  <!-- Bree -->
+  <SplitSection
+    image={breeImg}
+    alt="Bree Dolbec riding a dappled grey horse in a pink top under a blue sky"
+    eyebrow="Barn Manager"
+    title="Briana Dolbec"
+    imageSide="right"
+    bg="cream"
+    position="center 25%"
+  >
+    <p>
+      Bree has managed the barn at Avastar for five years, and she's a big part
+      of why the horses look and feel as good as they do.
+    </p>
+    <p>
+      Between Jenn and Bree, every horse gets noticed, every single day. It's
+      that steady, hands-on attention that boarders notice first and come to
+      count on.
+    </p>
+  </SplitSection>
+
+  <!-- Welcoming committee -->
+  <section class="bg-oat">
+    <div class="mx-auto max-w-6xl px-5 sm:px-8 py-20 md:py-24">
+      <SectionHeader
+        eyebrow="The welcoming committee"
+        title="The four-legged (and short-legged) crew"
+        intro="No tour of Avastar is complete without a proper introduction to the barn's unofficial staff."
+      />
+      <div class="mt-12 grid gap-8 sm:grid-cols-2">
+        {
+          crew.map((m) => (
+            <article class="overflow-hidden rounded-2xl border border-line bg-cream shadow-sm">
+              <div class="aspect-[4/3] overflow-hidden">
+                <Image
+                  src={m.img}
+                  alt={m.alt}
+                  width={880}
+                  class="h-full w-full object-cover"
+                  style={`object-position: ${m.position};`}
+                />
+              </div>
+              <div class="p-7">
+                <h3 class="font-display text-2xl text-navy">{m.name}</h3>
+                <p class="mt-1 text-xs font-semibold uppercase tracking-[0.16em] text-brass-deep">
+                  {m.role}
+                </p>
+                <p class="mt-4 leading-relaxed text-ink/80">{m.body}</p>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Lepore Farm -->
+  <SplitSection
+    image={loparoFarm}
+    alt="A distant view of the white barn and indoor arena at Lepore Farm across a green field"
+    eyebrow="The setting"
+    title="Lepore Farm"
+    imageSide="left"
+    bg="cream"
+    aspect="aspect-[4/3]"
+    position="center"
+    imgWidth={720}
+  >
+    <p>
+      Avastar is based at Lepore Farm, a classic New England equestrian property
+      on Angell Road in Lincoln, Rhode Island, just minutes from Providence and
+      an easy drive from southeastern Massachusetts.
+    </p>
+    <p>
+      It's the kind of place that feels a world away, but is closer than you'd
+      think. Come see it for yourself.
+    </p>
+  </SplitSection>
+
+  <!-- The community -->
+  <SplitSection
+    image={doubleRainbow}
+    alt="A double rainbow over the outdoor arena and the patio seating at Lepore Farm"
+    eyebrow="The community"
+    title="Good people, cheering each other on"
+    imageSide="right"
+    bg="oat"
+    position="center 60%"
+  >
+    <p>
+      Horse sport comes with real ups and downs. Progress arrives in waves,
+      setbacks sting, and it's easy to get discouraged along the way. What
+      carries you through is the people around you, and that's where Avastar
+      shines. This is a barn where everyone genuinely cheers for everyone else.
+    </p>
+    <p>
+      You'll find every kind of rider here, at every level of experience,
+      working toward all kinds of goals. What you won't find is anyone looking
+      down on where somebody else is in the journey.
+    </p>
+    <p>
+      It shows in the little things. Boarders linger after rides just to hang
+      out. Summer brings barn parties and cookouts, and when someone has a win
+      worth celebrating, in the saddle or in life, the whole barn turns out
+      for it.
+    </p>
+    <p>
+      A down-to-earth, encouraging atmosphere in a place this beautiful, with
+      care and training this good, is hard to come by in the horse world.
+    </p>
+  </SplitSection>
+
+  <CtaBand
+    eyebrow="Meet us"
+    heading="We'd love to show you around"
+    body="The best way to get to know Avastar and the whole crew is to visit. Call Jenn to find a good time to stop by."
+  />
+</Layout>

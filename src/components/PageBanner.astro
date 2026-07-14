@@ -1,0 +1,57 @@
+---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
+interface Props {
+  image: ImageMetadata;
+  alt: string;
+  eyebrow: string;
+  title: string;
+  lede?: string;
+  position?: string;
+}
+
+const { image, alt, eyebrow, title, lede, position = "center" } = Astro.props;
+---
+
+<section class="overflow-hidden bg-gradient-to-b from-oat to-cream">
+  <div class="mx-auto max-w-6xl px-5 sm:px-8 pt-14 pb-16 md:pt-20 md:pb-20">
+    <div class="grid items-center gap-12 lg:grid-cols-12 lg:gap-12">
+      <div class="lg:col-span-6">
+        <p class="eyebrow eyebrow--rule">{eyebrow}</p>
+        <h1
+          class="mt-4 text-4xl font-medium text-navy sm:text-5xl lg:text-[3.4rem] lg:leading-[1.1]"
+        >
+          {title}
+        </h1>
+        {
+          lede && (
+            <p class="mt-5 max-w-xl text-lg leading-relaxed text-ink/80 sm:text-xl">
+              {lede}
+            </p>
+          )
+        }
+      </div>
+
+      <div class="relative lg:col-span-6">
+        <div class="photo-frame aspect-[4/3]">
+          <Image
+            src={image}
+            alt={alt}
+            widths={[640, 960, 1280, 1600]}
+            sizes="(min-width: 1024px) 48vw, 92vw"
+            loading="eager"
+            fetchpriority="high"
+            class="h-full w-full object-cover"
+            style={`object-position: ${position};`}
+          />
+        </div>
+        <div
+          class="pointer-events-none absolute -bottom-4 -right-4 hidden h-28 w-28 rounded-2xl border border-brass/40 sm:block"
+          aria-hidden="true"
+        >
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

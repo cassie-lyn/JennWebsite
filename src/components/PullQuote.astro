@@ -1,0 +1,41 @@
+---
+interface Props {
+  quote: string;
+  cite?: string;
+  role?: string;
+}
+const { quote, cite, role } = Astro.props;
+---
+
+<section class="bg-navy text-cream">
+  <div class="mx-auto max-w-4xl px-5 sm:px-8 py-16 md:py-20 text-center">
+    <svg
+      viewBox="0 0 24 24"
+      class="mx-auto h-9 w-9 text-brass"
+      fill="currentColor"
+      aria-hidden="true"
+    >
+      <path
+        d="M7.5 6C5 6 3 8 3 10.5S5 15 7.5 15c0 2-1 3-3 3.5 3.5-.2 6-3 6-6.5V6H7.5Zm10 0C15 6 13 8 13 10.5S15 15 17.5 15c0 2-1 3-3 3.5 3.5-.2 6-3 6-6.5V6h-3Z"
+      ></path>
+    </svg>
+    <blockquote
+      class="mt-6 font-display text-2xl leading-snug text-cream sm:text-3xl md:text-[2rem] md:leading-[1.32]"
+    >
+      “{quote}”
+    </blockquote>
+    {
+      cite && (
+        <figcaption class="mt-6 text-sm font-semibold uppercase tracking-[0.16em] text-brass">
+          {cite}
+          {role && (
+            <span class="font-normal normal-case tracking-normal text-cream/60">
+              {" "}
+              · {role}
+            </span>
+          )}
+        </figcaption>
+      )
+    }
+  </div>
+</section>

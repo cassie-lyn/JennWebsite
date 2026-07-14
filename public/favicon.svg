@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Avastar Dressage horse head mark">
+  <rect width="64" height="64" rx="14" fill="#1C2A44"/>
+  <rect x="4.75" y="4.75" width="54.5" height="54.5" rx="10.5" fill="none" stroke="#A9803F" stroke-width="1.4" opacity="0.85"/>
+  <path d="M16 40.4
+           C14.4 39.2 14.2 36.6 15.2 34.2
+           C17.8 27.4 22.8 19.2 27.8 14.6
+           L30.6 7.6
+           L33.8 12.8
+           C34.5 12.6 35.3 12.6 36 12.8
+           L39.8 8.2
+           L41.6 14.6
+           C47 17.5 50.8 23 51.8 30
+           C52.4 36 52.4 43.5 52.2 50
+           L34.2 50
+           C34 45.5 33.2 40.5 31 36
+           C28.6 39.9 24.8 42.3 21.4 42.5
+           C18.9 42.6 16.8 41.5 16 40.4
+           Z"
+        fill="#FAF7F1"/>
+</svg>
