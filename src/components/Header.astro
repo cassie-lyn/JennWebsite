@@ -189,4 +189,12 @@ const isActive = (href: string) => {
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") setOpen(false);
   });
+
+  // Close when tapping/clicking anywhere outside the open menu
+  document.addEventListener("click", (e) => {
+    if (toggle?.getAttribute("aria-expanded") !== "true") return;
+    const target = e.target as Node;
+    if (panel?.contains(target) || toggle?.contains(target)) return;
+    setOpen(false);
+  });
 </script>
