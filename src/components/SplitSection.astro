@@ -12,6 +12,7 @@ interface Props {
   position?: string;
   aspect?: string;
   imgWidth?: number;
+  id?: string;
 }
 
 const {
@@ -24,10 +25,11 @@ const {
   position = "center",
   aspect = "aspect-[4/5]",
   imgWidth = 1040,
+  id,
 } = Astro.props;
 ---
 
-<section class={bg === "oat" ? "bg-oat" : "bg-cream"}>
+<section id={id} class:list={[bg === "oat" ? "bg-oat" : "bg-cream", id && "scroll-mt-24"]}>
   <div class="mx-auto max-w-6xl px-5 sm:px-8 py-18 md:py-24">
     <div class="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
       <div class={imageSide === "left" ? "lg:order-2" : ""}>
