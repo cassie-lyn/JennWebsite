@@ -9,7 +9,7 @@ export const site = {
   established: 2008,
   location: "Lincoln, Rhode Island",
   farm: "Lepore Farm",
-  url: "https://cassie-lyn.github.io/JennWebsite", // GitHub Pages; swap for a custom domain later
+  url: "https://avastardressage.com",
 
   phone: {
     display: "(401) 595-2217",
