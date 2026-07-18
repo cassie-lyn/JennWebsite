@@ -357,7 +357,7 @@ const description =
   }
 
   const errorMsg =
-    "Sorry, something went wrong sending your message. Please call (401) 595-2217 and we'll help right away.";
+    "Sorry, your message didn't go through this time. Please try again in a moment.";
 
   // --- Phone push notification (ntfy.sh) ------------------------------------
   // Each submission is also pushed to this private ntfy channel. Subscribe to
@@ -440,10 +440,18 @@ const description =
           "Thanks for reaching out. Your message is on its way, and we'll be in touch soon."
         );
       } else {
-        showStatus("error", errorMsg);
+        // TEMP DIAGNOSTIC: surface the real reason so we can fix the root cause.
+        showStatus(
+          "error",
+          errorMsg + (json && json.message ? ` (${json.message})` : "")
+        );
       }
-    } catch {
-      showStatus("error", errorMsg);
+    } catch (err) {
+      // TEMP DIAGNOSTIC: surface the network/fetch error text.
+      showStatus(
+        "error",
+        errorMsg + ` (${err instanceof Error ? err.message : String(err)})`
+      );
     } finally {
       // The check token is single-use, so reset it after every attempt.
       (window as any).hcaptcha?.reset();
