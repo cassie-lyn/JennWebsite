@@ -27,26 +27,32 @@ const gallery = [
   {
     img: galWinter,
     alt: "Jenn riding in the insulated indoor arena on a winter day",
+    position: "center",
   },
   {
     img: galAisle,
     alt: "A row of curious horses looking out over the European stall fronts down the matted barn aisle",
+    position: "center",
   },
   {
     img: galPaddockRainbow,
     alt: "A rainbow arching over the blue-roofed barn and paddocks after the rain",
+    position: "center top",
   },
   {
     img: galNuzzling,
     alt: "Two Avastar horses, a bay and a grey, reaching over their stall fronts to nuzzle",
+    position: "center top",
   },
   {
     img: galDoubleRainbow,
     alt: "A double rainbow over the outdoor arena and patio at Lepore Farm",
+    position: "center top",
   },
   {
     img: galResting,
     alt: "A blanketed horse lying down and resting comfortably in a deeply bedded stall",
+    position: "center",
   },
 ];
 
@@ -206,16 +212,16 @@ const description =
         title="A look around Avastar"
         intro="A few moments from life at Lepore Farm, from winter rides in the indoor to rainbows over the paddocks."
       />
-      <div class="mt-12 gap-4 [column-fill:_balance] columns-2 md:columns-3">
+      <div class="mt-12 grid grid-cols-2 gap-4 md:grid-cols-3">
         {
           gallery.map((g) => (
-            <figure class="gallery-tile mb-4 break-inside-avoid">
+            <figure class="gallery-tile aspect-[3/4]">
               <Image
                 src={g.img}
                 alt={g.alt}
                 width={720}
-                class="w-full"
                 loading="lazy"
+                style={`object-position: ${g.position}`}
               />
             </figure>
           ))
