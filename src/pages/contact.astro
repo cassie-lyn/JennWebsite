@@ -347,6 +347,40 @@ const description =
   const errorMsg =
     "Sorry, something went wrong sending your message. Please call (401) 595-2217 and we'll help right away.";
 
+  // --- Phone push notification (ntfy.sh) ------------------------------------
+  // Each submission is also pushed to this private ntfy channel. Subscribe to
+  // the exact channel name below in the free ntfy app to get phone alerts.
+  // The channel name is the only secret; change it here to rotate it.
+  const NTFY_URL = "https://ntfy.sh/avastar-inquiries-7ae4cf4a00ff4aea";
+
+  async function notifyPhone(d: FormData) {
+    try {
+      const phone = d.get("phone");
+      const body = [
+        `Name: ${d.get("name") || ""}`,
+        `Email: ${d.get("email") || ""}`,
+        phone ? `Phone: ${phone}` : null,
+        `Interested in: ${d.get("interest") || ""}`,
+        "",
+        String(d.get("message") || ""),
+      ]
+        .filter((line) => line !== null)
+        .join("\n");
+
+      await fetch(NTFY_URL, {
+        method: "POST",
+        body,
+        headers: {
+          Title: "New Avastar website inquiry",
+          Tags: "horse",
+          Priority: "high",
+        },
+      });
+    } catch {
+      // A failed push never blocks the form; the email copy is the record.
+    }
+  }
+
   form?.addEventListener("submit", async (e) => {
     e.preventDefault();
     if (!form.checkValidity()) {
@@ -359,6 +393,9 @@ const description =
       "subject",
       `Avastar website inquiry: ${data.get("interest") || "General"}`
     );
+
+    // Push to the phone in parallel; the email submission below is the record.
+    notifyPhone(data);
 
     const original = submitBtn?.textContent ?? "Send message";
     if (submitBtn) {
