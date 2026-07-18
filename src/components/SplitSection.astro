@@ -29,7 +29,7 @@ const {
 } = Astro.props;
 ---
 
-<section id={id} class:list={[bg === "oat" ? "bg-oat" : "bg-cream", id && "scroll-mt-24"]}>
+<section id={id} class={bg === "oat" ? "bg-oat" : "bg-cream"}>
   <div class="mx-auto max-w-6xl px-5 sm:px-8 py-18 md:py-24">
     <div class="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
       <div class={imageSide === "left" ? "lg:order-2" : ""}>
