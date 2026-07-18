@@ -254,16 +254,6 @@ const description =
                 ></textarea>
               </div>
 
-              <!--
-                hCaptcha "I'm human" check. Uses Web3Forms' shared site key,
-                which Web3Forms validates server-side (no separate account).
-              -->
-              <div
-                class="h-captcha"
-                data-sitekey="50b2fe65-b00b-4b9e-ad62-3ba471098be2"
-              >
-              </div>
-
               <div>
                 <button
                   type="submit"
@@ -329,8 +319,6 @@ const description =
     showMessageButton={false}
   />
 </Layout>
-
-<script src="https://js.hcaptcha.com/1/api.js" async defer is:inline></script>
 
 <script>
   // --- Web3Forms submission -------------------------------------------------
@@ -402,15 +390,6 @@ const description =
 
     const data = new FormData(form);
 
-    // Require the "I'm human" check before sending.
-    if (!data.get("h-captcha-response")) {
-      showStatus(
-        "error",
-        "Please complete the “I am human” check below, then send again."
-      );
-      return;
-    }
-
     data.set(
       "subject",
       `Avastar website inquiry: ${data.get("interest") || "General"}`
@@ -440,21 +419,11 @@ const description =
           "Thanks for reaching out. Your message is on its way, and we'll be in touch soon."
         );
       } else {
-        // TEMP DIAGNOSTIC: surface the real reason so we can fix the root cause.
-        showStatus(
-          "error",
-          errorMsg + (json && json.message ? ` (${json.message})` : "")
-        );
+        showStatus("error", errorMsg);
       }
-    } catch (err) {
-      // TEMP DIAGNOSTIC: surface the network/fetch error text.
-      showStatus(
-        "error",
-        errorMsg + ` (${err instanceof Error ? err.message : String(err)})`
-      );
+    } catch {
+      showStatus("error", errorMsg);
     } finally {
-      // The check token is single-use, so reset it after every attempt.
-      (window as any).hcaptcha?.reset();
       if (submitBtn) {
         submitBtn.disabled = false;
         submitBtn.textContent = original;
