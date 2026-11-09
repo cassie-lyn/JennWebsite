@@ -2,6 +2,7 @@
 import { Image } from "astro:assets";
 import Layout from "../layouts/Layout.astro";
 import CtaBand from "../components/CtaBand.astro";
+import AnniversarySeal from "../components/AnniversarySeal.astro";
 import { site, withBase } from "../data/site";
 
 import heroImg from "../assets/photos/jenn-riding-hero.jpg";
@@ -40,7 +41,10 @@ const features = [
 ];
 
 const stats = [
-  { value: "Est. 2008", label: "Avastar founded at Lepore Farm" },
+  {
+    value: `${site.yearsCelebrating} years`,
+    label: `At Lepore Farm since ${site.established}`,
+  },
   { value: "13-stall", label: "Main barn" },
   { value: "Regulation", label: "Outdoor dressage arena" },
   { value: "GGT footing", label: "Warm indoor arena" },
@@ -140,6 +144,11 @@ const description =
           <div class="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
             <a href={withBase("/contact")} class="btn btn-brass">Schedule a Visit</a>
             <a href={withBase("/boarding")} class="btn btn-outline">Explore Boarding</a>
+          </div>
+
+          <!-- Anniversary seal -->
+          <div class="mt-10 border-t border-line pt-8">
+            <AnniversarySeal />
           </div>
         </div>
 

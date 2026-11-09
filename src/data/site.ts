@@ -7,6 +7,8 @@ export const site = {
   name: "Avastar Dressage",
   tagline: "Dressage training & full-care boarding at Lepore Farm",
   established: 2008,
+  // Anniversary shown on the home page. Bump this each year (2008 + n).
+  yearsCelebrating: 18,
   location: "Lincoln, Rhode Island",
   farm: "Lepore Farm",
   url: "https://avastardressage.com",
