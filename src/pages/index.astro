@@ -127,8 +127,10 @@ const description =
   <!-- ============================ HERO ============================ -->
   <section class="overflow-hidden bg-gradient-to-b from-oat to-cream">
     <div class="mx-auto max-w-6xl px-5 sm:px-8 pt-14 pb-16 md:pt-20 md:pb-24">
-      <div class="grid items-center gap-12 lg:grid-cols-12 lg:gap-12">
-        <div class="lg:col-span-6">
+      <!-- On desktop the photo spans both rows (text, then seal) on the right.
+           On mobile the DOM order applies: text, photo, then seal. -->
+      <div class="grid items-center gap-12 lg:grid-cols-12 lg:gap-x-12 lg:gap-y-0">
+        <div class="lg:col-span-6 lg:row-start-1 lg:self-end">
           <p class="eyebrow eyebrow--rule">
             {site.location}
           </p>
@@ -145,14 +147,9 @@ const description =
             <a href={withBase("/contact")} class="btn btn-brass">Schedule a Visit</a>
             <a href={withBase("/boarding")} class="btn btn-outline">Explore Boarding</a>
           </div>
-
-          <!-- Anniversary seal -->
-          <div class="mt-10 border-t border-line pt-8">
-            <AnniversarySeal />
-          </div>
         </div>
 
-        <div class="relative lg:col-span-6">
+        <div class="relative lg:col-span-6 lg:col-start-7 lg:row-span-2 lg:row-start-1">
           <div class="photo-frame aspect-[4/3]">
             <Image
               src={heroImg}
@@ -169,6 +166,13 @@ const description =
             aria-hidden="true"
           >
           </div>
+        </div>
+
+        <!-- Anniversary seal: under the text on desktop, under the photo on mobile -->
+        <div
+          class="lg:col-span-6 lg:col-start-1 lg:row-start-2 lg:self-start lg:mt-10 lg:border-t lg:border-line lg:pt-8"
+        >
+          <AnniversarySeal />
         </div>
       </div>
     </div>

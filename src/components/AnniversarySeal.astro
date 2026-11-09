@@ -76,16 +76,29 @@ const ringText = `Celebrating ${years} years  ·  Avastar Dressage  ·  Est. ${s
 </div>
 
 <style>
+  /* Nothing moves until the script adds .is-visible, which happens once the
+     whole seal block is on screen. With JS on, the seal waits hidden so its
+     pop-in is the reveal; with JS off it just shows. */
   .seal {
     color: var(--color-brass);
-    animation: seal-pop 900ms cubic-bezier(0.34, 1.56, 0.64, 1) 250ms both;
   }
 
-  .seal-ring {
-    animation: seal-spin 32s linear infinite;
+  @media (scripting: enabled) {
+    .seal {
+      opacity: 0;
+    }
   }
 
-  .seal:hover .seal-ring {
+  .anniv.is-visible .seal {
+    opacity: 1;
+    animation: seal-pop 900ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  }
+
+  .anniv.is-visible .seal-ring {
+    animation: seal-spin 32s linear 900ms infinite;
+  }
+
+  .anniv.is-visible .seal:hover .seal-ring {
     animation-duration: 8s;
   }
 
@@ -99,13 +112,22 @@ const ringText = `Celebrating ${years} years  ·  Avastar Dressage  ·  Est. ${s
       transparent 60%
     );
     transform: translateX(-120%);
-    animation: seal-sheen 5s ease-in-out 1.4s infinite;
     pointer-events: none;
+  }
+
+  .anniv.is-visible .sheen {
+    animation: seal-sheen 5s ease-in-out 1.4s infinite;
   }
 
   .sparkle {
     opacity: 0;
-    animation: seal-twinkle 4s ease-in-out infinite;
+  }
+
+  .anniv.is-visible .sparkle {
+    animation-name: seal-twinkle;
+    animation-duration: 4s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
   }
 
   @keyframes seal-pop {
@@ -153,10 +175,14 @@ const ringText = `Celebrating ${years} years  ·  Avastar Dressage  ·  Est. ${s
 
   @media (prefers-reduced-motion: reduce) {
     .seal,
-    .seal-ring,
-    .sheen,
-    .sparkle {
+    .anniv.is-visible .seal,
+    .anniv.is-visible .seal-ring,
+    .anniv.is-visible .sheen,
+    .anniv.is-visible .sparkle {
       animation: none;
+    }
+    .seal {
+      opacity: 1;
     }
     .sparkle {
       opacity: 0.8;
@@ -165,28 +191,37 @@ const ringText = `Celebrating ${years} years  ·  Avastar Dressage  ·  Est. ${s
 </style>
 
 <script>
-  // Count the number up from 0 the first time the seal scrolls into view.
+  // Start everything (pop-in, spin, sheen, sparkles, count-up) only once the
+  // whole seal block is fully inside the viewport.
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  document.querySelectorAll<HTMLElement>(".anniv-count").forEach((el) => {
+
+  const countUp = (el: HTMLElement) => {
     const target = Number(el.dataset.target);
     if (reduce || !target) return;
+    const duration = 1400;
+    const start = performance.now() + 300;
+    const tick = (now: number) => {
+      const t = Math.min(Math.max((now - start) / duration, 0), 1);
+      const eased = 1 - Math.pow(1 - t, 3);
+      el.textContent = String(Math.round(eased * target));
+      if (t < 1) requestAnimationFrame(tick);
+    };
     el.textContent = "0";
+    requestAnimationFrame(tick);
+  };
+
+  document.querySelectorAll<HTMLElement>(".anniv").forEach((block) => {
     const io = new IntersectionObserver(
       (entries) => {
-        if (!entries.some((e) => e.isIntersecting)) return;
+        // 0.99 rather than 1 so sub-pixel rounding can't block the trigger.
+        if (!entries.some((e) => e.intersectionRatio >= 0.99)) return;
         io.disconnect();
-        const duration = 1400;
-        const start = performance.now() + 300;
-        const tick = (now: number) => {
-          const t = Math.min(Math.max((now - start) / duration, 0), 1);
-          const eased = 1 - Math.pow(1 - t, 3);
-          el.textContent = String(Math.round(eased * target));
-          if (t < 1) requestAnimationFrame(tick);
-        };
-        requestAnimationFrame(tick);
+        block.classList.add("is-visible");
+        const count = block.querySelector<HTMLElement>(".anniv-count");
+        if (count) countUp(count);
       },
-      { threshold: 0.6 },
+      { threshold: [0.99, 1] },
     );
-    io.observe(el);
+    io.observe(block);
   });
 </script>
